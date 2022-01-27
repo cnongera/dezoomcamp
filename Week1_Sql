@@ -1,0 +1,36 @@
+--- Week 1 SQL answers
+--Q3
+select count(*) 
+from public.yellow_taxi_data
+where tpep_pickup_datetime::date = date '2021-01-15'
+
+--4
+--On which day it was the largest tip in January?
+--(note: it's not a typo, it's "tip", not "trip")
+
+select tpep_pickup_datetime::date, max(tip_amount) as mxtip
+from public.yellow_taxi_data as taskis
+group by taskis.tpep_pickup_datetime::date
+order by mxtip desc limit 1
+
+
+
+---5
+--- most popular destination for passengers 
+--picked up in central park on January 14
+-- destination?
+--- pickup = central park
+--- drop off zone --- zone name (not id).
+
+select * 
+from public.yellow_taxi_data
+where pulocationid = 'Central Park' and
+tpep_pickup_datetime::date = date '2021-01-14'
+
+--- I got the error below, given that I was too tired and the deadline was near, I just didn't complete
+--- I shall endeavour to complete these other questions
+---ERROR:  column "zone_name" does not exist
+---LINE 3: where zone_name = 'Central Park'
+              ^
+---SQL state: 42703
+---Character: 45
